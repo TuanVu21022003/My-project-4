@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Target = GameManager.instance.player;
     }
 
     // Update is called once per frame
@@ -33,12 +33,8 @@ public class Enemy : MonoBehaviour
 
     public void OnDespawn()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
-    public void SetTarget(GameObject _player)
-    {
-        this.Target = _player;
-    }
 
 }

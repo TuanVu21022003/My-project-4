@@ -26,7 +26,11 @@ public class Player : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.Space))
         {
             Debug.Log("Da nhan" + this.transform.right);
-            Instantiate(CircleBinPrefab, ShootPoint.position, Quaternion.identity).OnInit(this.transform.right);
+            GameObject circleBin = BinPool.instance.GetBin();
+            circleBin.transform.position = ShootPoint.position;
+            circleBin.transform.rotation = this.transform.rotation;
+            circleBin.SetActive(true);
+            circleBin.GetComponent<CircleBin>().OnInit(this.transform.right);
         }
 
         MoveController();

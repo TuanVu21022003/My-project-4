@@ -19,7 +19,7 @@ public class CircleBin : MonoBehaviour
 
     public void OnDespawn()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,6 +27,8 @@ public class CircleBin : MonoBehaviour
         if(collision.tag == "Enemy")
         {
             collision.GetComponent<Enemy>().OnDespawn();
+            GameManager.instance.SetScore(1);
+            GameManager.instance.SetScoreText();
         }
     }
 }
