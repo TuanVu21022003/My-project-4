@@ -10,13 +10,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float speedMove = 500, speedRotation = 300;
     [SerializeField] private Transform ShootPoint;
     [SerializeField] private HealthBar healthBar;
+    [SerializeField] private GameObject Anim;
     private Vector3 dir;
     private float angle = 0;
     private float hp;
     void Start()
     {
         hp = 100;
-        healthBar.OnInit(hp, transform);
+        healthBar.OnInit(hp);
     }
 
     // Update is called once per frame
@@ -26,7 +27,7 @@ public class Player : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.Space))
         {
             Debug.Log("Da nhan" + this.transform.right);
-            GameObject circleBin = BinPool.instance.GetBin();
+            GameObject circleBin = ObjectPooling.instance.getObject(CircleBinPrefab.gameObject);
             circleBin.transform.position = ShootPoint.position;
             circleBin.transform.rotation = this.transform.rotation;
             circleBin.SetActive(true);
@@ -35,6 +36,11 @@ public class Player : MonoBehaviour
 
         MoveController();
         RotationController();
+    }
+
+    public void SetSprite(Sprite spriteImage)
+    {
+        Anim.GetComponent<SpriteRenderer>().sprite = spriteImage;
     }
 
     public void MoveController()

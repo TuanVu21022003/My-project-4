@@ -6,10 +6,8 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Image imageFill;
-    [SerializeField] private Vector3 offset;
 
     private float maxHp, hp;
-    private Transform Target;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,15 +18,12 @@ public class HealthBar : MonoBehaviour
     void Update()
     {
         imageFill.fillAmount = Mathf.Lerp(imageFill.fillAmount, hp/maxHp, Time.deltaTime * 4f);
-        transform.position = Target.position + offset;
     }
 
-    public void OnInit(float maxHp, Transform target)
+    public void OnInit(float maxHp)
     {
         this.maxHp = maxHp;
         this.hp = maxHp;
-        imageFill.fillAmount = 1;
-        this.Target = target;
     }
 
     public void SetHP(float hp)
